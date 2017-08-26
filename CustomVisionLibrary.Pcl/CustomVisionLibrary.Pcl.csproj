@@ -42,11 +42,17 @@
     <Compile Include="..\CustomVisionLibrary\Models\ImagePredictionResult.cs">
       <Link>Models\ImagePredictionResult.cs</Link>
     </Compile>
+    <Compile Include="..\CustomVisionLibrary\Models\ImageTagPerformance.cs">
+      <Link>Models\ImageTagPerformance.cs</Link>
+    </Compile>
     <Compile Include="..\CustomVisionLibrary\Models\ImageTagPrediction.cs">
       <Link>Models\ImageTagPrediction.cs</Link>
     </Compile>
     <Compile Include="..\CustomVisionLibrary\Models\Iteration.cs">
       <Link>Models\Iteration.cs</Link>
+    </Compile>
+    <Compile Include="..\CustomVisionLibrary\Models\IterationPerformance.cs">
+      <Link>Models\IterationPerformance.cs</Link>
     </Compile>
     <Compile Include="..\CustomVisionLibrary\Models\Project.cs">
       <Link>Models\Project.cs</Link>

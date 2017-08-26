@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -33,31 +35,24 @@ namespace CustomVisionLibrary
 
         public async Task<IEnumerable<Project>> GetProjectsAsync()
         {
-            if (string.IsNullOrWhiteSpace(TrainingKey))
-            {
-                throw new ArgumentNullException(nameof(TrainingKey));
-            }
-
-            var endpoint = "Training/projects";
-            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            request.Headers.Add("Training-Key", TrainingKey);
-
+            var request = CreateTrainingRequest("Training/projects");
             var content = await SendRequestAsync<IEnumerable<Project>>(request);
+
             return content;
         }
 
         public async Task<IEnumerable<Iteration>> GetIterationsAsync(Guid projectId)
         {
-            if (string.IsNullOrWhiteSpace(TrainingKey))
-            {
-                throw new ArgumentNullException(nameof(TrainingKey));
-            }
-
-            var endpoint = $"Training/projects/{projectId}/iterations";
-            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            request.Headers.Add("Training-Key", TrainingKey);
-
+            var request = CreateTrainingRequest($"Training/projects/{projectId}/iterations");
             var content = await SendRequestAsync<IEnumerable<Iteration>>(request);
+
+            return content.OrderByDescending(i => i.TrainedAt).ToList();
+        }
+        public async Task<IterationPerformance> GetIterationPerformanceAsync(Guid projectId, Guid iterationId, double threshold = 0.9)
+        {
+            var request = CreateTrainingRequest($"Training/projects/{projectId}/iterations/{iterationId}/performance?threshold={threshold.ToString(CultureInfo.InvariantCulture)}");
+            var content = await SendRequestAsync<IterationPerformance>(request);
+
             return content;
         }
 
@@ -89,12 +84,19 @@ namespace CustomVisionLibrary
             return content;
         }
 
+        private HttpRequestMessage CreateTrainingRequest(string uri)
+        {
+            EnsureTrainingKeySet();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            request.Headers.Add("Training-Key", TrainingKey);
+
+            return request;
+        }
+
         private HttpRequestMessage CreatePredictRequest(Guid projectId, Guid? iterationId)
         {
-            if (string.IsNullOrWhiteSpace(PredictionKey))
-            {
-                throw new ArgumentNullException(nameof(PredictionKey));
-            }
+            EnsurePredictionKeySet();
 
             var endpoint = $"Prediction/{projectId}/image?iterationId={iterationId}";
             var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
@@ -111,6 +113,22 @@ namespace CustomVisionLibrary
             var content = JsonConvert.DeserializeObject<T>(responseContentString);
 
             return content;
+        }
+
+        private void EnsureTrainingKeySet()
+        {
+            if (string.IsNullOrWhiteSpace(TrainingKey))
+            {
+                throw new ArgumentNullException(nameof(TrainingKey));
+            }
+        }
+
+        private void EnsurePredictionKeySet()
+        {
+            if (string.IsNullOrWhiteSpace(PredictionKey))
+            {
+                throw new ArgumentNullException(nameof(PredictionKey));
+            }
         }
 
         public void Dispose()
