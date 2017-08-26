@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using CustomVisionLibrary.Models;
+using System.Threading;
 
 namespace CustomVisionLibrary
 {
@@ -13,6 +14,8 @@ namespace CustomVisionLibrary
         string TrainingKey { get; set; }
 
         Task<IEnumerable<Project>> GetProjectsAsync();
+
+        Task<IEnumerable<Iteration>> GetIterationsAsync(Guid projectId);
 
         Task<ImagePredictionResult> PredictImageAsync(Guid projectId, Stream image, Guid? iterationId = null);
 

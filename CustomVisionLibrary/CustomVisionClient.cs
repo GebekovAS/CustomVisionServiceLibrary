@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CustomVisionLibrary
@@ -28,6 +29,36 @@ namespace CustomVisionLibrary
             {
                 BaseAddress = new Uri(customVisionEndpoint.EndsWith("/") ? customVisionEndpoint : customVisionEndpoint += "/")
             };
+        }
+
+        public async Task<IEnumerable<Project>> GetProjectsAsync()
+        {
+            if (string.IsNullOrWhiteSpace(TrainingKey))
+            {
+                throw new ArgumentNullException(nameof(TrainingKey));
+            }
+
+            var endpoint = "Training/projects";
+            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+            request.Headers.Add("Training-Key", TrainingKey);
+
+            var content = await SendRequestAsync<IEnumerable<Project>>(request);
+            return content;
+        }
+
+        public async Task<IEnumerable<Iteration>> GetIterationsAsync(Guid projectId)
+        {
+            if (string.IsNullOrWhiteSpace(TrainingKey))
+            {
+                throw new ArgumentNullException(nameof(TrainingKey));
+            }
+
+            var endpoint = $"Training/projects/{projectId}/iterations";
+            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+            request.Headers.Add("Training-Key", TrainingKey);
+
+            var content = await SendRequestAsync<IEnumerable<Iteration>>(request);
+            return content;
         }
 
         public async Task<ImagePredictionResult> PredictImageAsync(Guid projectId, Stream image, Guid? iterationId = null)
@@ -58,22 +89,6 @@ namespace CustomVisionLibrary
             return content;
         }
 
-        public async Task<IEnumerable<Project>> GetProjectsAsync()
-        {
-            if (string.IsNullOrWhiteSpace(TrainingKey))
-            {
-                throw new ArgumentNullException(nameof(TrainingKey));
-            }
-
-            var resource = $"Training/projects";
-
-            var request = new HttpRequestMessage(HttpMethod.Get, resource);
-            request.Headers.Add("Training-Key", TrainingKey);
-
-            var content = await SendRequestAsync<IEnumerable<Project>>(request);
-            return content;
-        }
-
         private HttpRequestMessage CreatePredictRequest(Guid projectId, Guid? iterationId)
         {
             if (string.IsNullOrWhiteSpace(PredictionKey))
@@ -81,10 +96,10 @@ namespace CustomVisionLibrary
                 throw new ArgumentNullException(nameof(PredictionKey));
             }
 
-            var resource = $"Prediction/{projectId}/image?iterationId={iterationId}";
-
-            var request = new HttpRequestMessage(HttpMethod.Post, resource);
+            var endpoint = $"Prediction/{projectId}/image?iterationId={iterationId}";
+            var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
             request.Headers.Add("Prediction-Key", PredictionKey);
+
             return request;
         }
 
