@@ -7,10 +7,10 @@
     <Company />
     <Product>CustomVision Client Library</Product>
     <Description>A lightweight library that allows to easily analyze images using Custom Vision, with the ability to automatically resize the source before sending it to the service.</Description>
-    <RepositoryUrl>https://github.com/marcominerva/CustomVisionLibrary</RepositoryUrl>
+    <RepositoryUrl>https://github.com/marcominerva/CustomVisionServiceLibrary</RepositoryUrl>
     <RepositoryType></RepositoryType>
-    <PackageIconUrl>https://raw.githubusercontent.com/marcominerva/CustomVisionLibrary/master/Icon.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/marcominerva/CustomVisionLibrary</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/marcominerva/CustomVisionServiceLibrary/master/Icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/marcominerva/CustomVisionServiceLibrary</PackageProjectUrl>
     <PackageTags>custom vision, computer vision, cognitive services</PackageTags>
     <Copyright>Marco Minerva - 2017</Copyright>
     <Version>0.9.0</Version>
