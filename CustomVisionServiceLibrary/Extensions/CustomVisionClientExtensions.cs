@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomVisionLibrary.Extensions
+namespace CustomVisionServiceLibrary.Extensions
 {
     public static class CustomVisionClientExtensions
     {

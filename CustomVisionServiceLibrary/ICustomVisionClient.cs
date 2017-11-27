@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using CustomVisionLibrary.Models;
 using System.Threading;
+using CustomVisionServiceLibrary.Models;
 
-namespace CustomVisionLibrary
+namespace CustomVisionServiceLibrary
 {
     public interface ICustomVisionClient
     {

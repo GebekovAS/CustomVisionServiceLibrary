@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomVisionLibrary\CustomVisionLibrary.csproj" />
+    <ProjectReference Include="..\CustomVisionServiceLibrary\CustomVisionServiceLibrary.csproj" />
   </ItemGroup>
 
 </Project>

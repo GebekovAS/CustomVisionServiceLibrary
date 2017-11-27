@@ -1,4 +1,4 @@
-﻿using CustomVisionLibrary.Models;
+﻿using CustomVisionServiceLibrary.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CustomVisionLibrary
+namespace CustomVisionServiceLibrary
 {
     public class CustomVisionClient : ICustomVisionClient, IDisposable
     {

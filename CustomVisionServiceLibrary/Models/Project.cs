@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomVisionLibrary.Models
+namespace CustomVisionServiceLibrary.Models
 {
     public class Project
     {

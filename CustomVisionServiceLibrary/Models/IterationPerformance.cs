@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomVisionLibrary.Models
+namespace CustomVisionServiceLibrary.Models
 {
-    public class ImageTagPerformance
+    public class IterationPerformance
     {
-        public Guid TagId { get; set; }
-
-        public string TagName { get; set; }
-
         public double Precision { get; set; }
 
         public double PrecisionStdDeviation { get; set; }
@@ -17,5 +14,8 @@ namespace CustomVisionLibrary.Models
         public double Recall { get; set; }
 
         public double RecallStdDeviation { get; set; }
+
+        [JsonProperty("PerTagPerformance")]
+        public IEnumerable<ImageTagPerformance> TagPerformance { get; set; }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomVisionLibrary", "CustomVisionLibrary\CustomVisionLibrary.csproj", "{F5A589A0-DA1C-4844-A97F-0AF66F960372}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomVisionServiceLibrary", "CustomVisionServiceLibrary\CustomVisionServiceLibrary.csproj", "{F5A589A0-DA1C-4844-A97F-0AF66F960372}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{30F66CE2-2D2D-4ACB-9362-97E363519DA1}"
 EndProject
