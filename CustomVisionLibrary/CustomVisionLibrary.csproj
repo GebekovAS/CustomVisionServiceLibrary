@@ -1,10 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Marco Minerva</Authors>
+    <Company />
+    <Product>CustomVision Client Library</Product>
+    <Description>A lightweight library that allows to easily analyze images using Custom Vision, with the ability to automatically resize the source before sending it to the service.</Description>
+    <RepositoryUrl>https://github.com/marcominerva/CustomVisionLibrary</RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <PackageIconUrl>https://raw.githubusercontent.com/marcominerva/CustomVisionLibrary/master/Icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/marcominerva/CustomVisionLibrary</PackageProjectUrl>
+    <PackageTags>custom vision, computer vision, cognitive services</PackageTags>
+    <Copyright>Marco Minerva - 2017</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="7.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 

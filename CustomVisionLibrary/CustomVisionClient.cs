@@ -20,7 +20,7 @@ namespace CustomVisionLibrary
 
         public string PredictionKey { get; set; }
 
-        private HttpClient client;
+        private readonly HttpClient client;
 
         public CustomVisionClient(string predictionKey, string trainingKey = null, string customVisionEndpoint = DefaultCustomVisionEndPoint)
         {
@@ -108,11 +108,24 @@ namespace CustomVisionLibrary
         private async Task<T> SendRequestAsync<T>(HttpRequestMessage request)
         {
             var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var responseContentString = await response.Content.ReadAsStringAsync();
-            var content = JsonConvert.DeserializeObject<T>(responseContentString);
 
-            return content;
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContentString = await response.Content.ReadAsStringAsync();
+                var content = JsonConvert.DeserializeObject<T>(responseContentString);
+
+                return content;
+            }
+            else
+            {
+                var exception = new HttpOperationException(response.ReasonPhrase)
+                {
+                    Request = request,
+                    Response = response
+                };
+
+                throw exception;
+            }
         }
 
         private void EnsureTrainingKeySet()
