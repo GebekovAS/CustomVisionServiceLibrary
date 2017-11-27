@@ -1,4 +1,4 @@
-﻿using CustomVisionLibrary.Models;
+﻿using CustomVisionServiceLibrary.Models;
 using ImageMagick;
 using System;
 using System.Collections.Generic;
