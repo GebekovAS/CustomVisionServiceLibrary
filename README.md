@@ -1,3 +1,3 @@
-# Custom Vision Library
+# Custom Vision Service Library
 
-**Custom Vision Library** is a .NET Standard as well a PCL library that allows you to access the Custom Vision APIs from virtually any .NET project, on every platform.
+A lightweight library that allows to easily analyze images using Custom Vision, with the ability to automatically resize the source before sending it to the service.
