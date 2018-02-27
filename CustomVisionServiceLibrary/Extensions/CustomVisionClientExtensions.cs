@@ -77,5 +77,4 @@ namespace CustomVisionServiceLibrary.Extensions
         //    }
         //}
     }
-
 }
