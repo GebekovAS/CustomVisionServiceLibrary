@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,9 +7,16 @@ namespace CustomVisionServiceLibrary.Models
 {
     public class BoundingBox
     {
-        public double left { get; set; }
-        public double top { get; set; }
-        public double width { get; set; }
-        public double height { get; set; }
+        [JsonProperty("left")]
+        public double Left { get; set; }
+
+        [JsonProperty("top")]
+        public double Top { get; set; }
+
+        [JsonProperty("width")]
+        public double Width { get; set; }
+
+        [JsonProperty("height")]
+        public double Height { get; set; }
     }
 }

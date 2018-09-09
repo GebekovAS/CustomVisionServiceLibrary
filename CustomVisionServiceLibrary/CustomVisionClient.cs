@@ -59,10 +59,9 @@ namespace CustomVisionServiceLibrary
         public async Task<ImagePredictionResult> PredictImageAsync(Guid projectId, Stream image, Guid? iterationId = null)
         {
             var request = CreatePredictRequest(projectId, iterationId);
-
+            image.Position = 0;
             request.Content = new StreamContent(image);
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
             var content = await SendRequestAsync<ImagePredictionResult>(request);
             return content;
         }
@@ -98,8 +97,10 @@ namespace CustomVisionServiceLibrary
         {
             EnsurePredictionKeySet();
 
-            var endpoint = $"Prediction/{projectId}/image?iterationId={iterationId}";
-            var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
+            var endpoint = $"Prediction/{projectId}/image";
+            endpoint += iterationId == null ? "" : $"?iterationId={iterationId}";
+                
+            var request = new HttpRequestMessage(HttpMethod.Post,endpoint);
             request.Headers.Add("Prediction-Key", PredictionKey);
 
             return request;
@@ -107,7 +108,7 @@ namespace CustomVisionServiceLibrary
 
         private async Task<T> SendRequestAsync<T>(HttpRequestMessage request)
         {
-            var response = await client.SendAsync(request);
+            var response = client.SendAsync(request).Result;
 
             if (response.IsSuccessStatusCode)
             {
