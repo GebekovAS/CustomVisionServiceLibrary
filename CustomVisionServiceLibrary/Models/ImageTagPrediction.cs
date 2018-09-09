@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CustomVisionServiceLibrary.Models
 {
     public class ImageTagPrediction
     {
+        public double Probability { get; set; }
+
         public Guid TagId { get; set; }
 
-        public string Tag { get; set; }
+        public string TagName { get; set; }
 
-        public double Probability { get; set; }
+        public ImageRegion Region { get; set; }  
     }
 }

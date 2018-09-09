@@ -5,8 +5,14 @@ using System.Text;
 
 namespace CustomVisionServiceLibrary.Models
 {
-    public class IterationPerformance
+    public class PerTagPerformance
     {
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
         [JsonProperty("precision")]
         public double Precision { get; set; }
 
@@ -21,8 +27,5 @@ namespace CustomVisionServiceLibrary.Models
 
         [JsonProperty("averagePrecision")]
         public double AveragePrecision { get; set; }
-
-        [JsonProperty("perTagPerformance")]
-        public IEnumerable<PerTagPerformance> PerTagPerformance { get; set; }
     }
 }

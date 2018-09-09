@@ -14,7 +14,7 @@ namespace CustomVisionServiceLibrary
 {
     public class CustomVisionClient : ICustomVisionClient, IDisposable
     {
-        private const string DefaultCustomVisionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.1/";
+        private const string DefaultCustomVisionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/";
 
         public string TrainingKey { get; set; }
 
